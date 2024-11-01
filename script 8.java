@@ -20,3 +20,35 @@ function createNewElement()
         container.appendChild(newElement);
 
 }
+
+function upElement(element){
+    const prevElement = element.previousElementSibling;
+    if(prevElement){
+        element.parentNode.insertBefore(element, prevElement);
+        updateElementsArray();
+    }
+}
+
+function downElement(element){
+    const nextElement = element.nextElementSibling;
+    if(nextElement){
+        element.parentNode.insertBefore(nextElement, element);
+        updateElementsArray();
+    }
+}
+
+function deleteElement(element){
+    element.parentNode.removeChild(element);
+}
+
+function updateElementsArray(){
+    elements=[];
+    document.querySelectorAll('.element').forEach(element=>
+    {
+        const label = element.querySelector('input[type="text"]').value;
+        const number = element.querySelector('input[type="number"]').value;
+        elements.push({label, number});
+    })
+}
+
+document.addEventListener('DOMContentLoaded', createNewElement);
